@@ -1,0 +1,153 @@
+﻿<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Simulasi Motor">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#d71920">
+  <meta name="description" content="Pricelist dan simulasi kredit motor Honda. Pilih motor, lihat semua warna, atur DP serta angsuran, lalu konsultasikan promo melalui WhatsApp.">
+  <title>Simulasi Motor | Pricelist &amp; Kredit Honda</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/motor-apple-180.png" sizes="180x180">
+  <link rel="icon" href="icons/motor-192.png" type="image/png">
+  <link rel="preload" href="fonts/Poppins-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Poppins-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="style.css?v=20261019-red-1">
+  <link rel="stylesheet" href="pwa.css?v=20261019-red-1">
+  <script src="data-motor.js" defer></script>
+  <script src="foto-unit.js" defer></script>
+  <script src="credit-engine.js" defer></script>
+  <script src="config.js?v=20261019-red-1" defer></script>
+  <script src="pelwil.js?v=20261019-red-1" defer></script>
+  <script src="specs.js?v=20261019-red-1" defer></script>
+  <script src="app.js?v=20261019-red-1" defer></script>
+  <script src="pwa.js?v=20261019-red-1" defer></script>
+</head>
+<body>
+<div id="honda-app" class="hm-app">
+  <a class="hm-skip" href="#simulator">Langsung ke simulasi</a>
+  <header class="hm-header">
+    <div class="hm-shell hm-header-inner">
+      <a class="hm-brand" href="#simulator" aria-label="Simulasi Motor, ke simulator">
+        <img src="icons/motor.svg" alt="" width="56" height="40">
+        <span><strong>SIMULASI MOTOR</strong><small>Pricelist &amp; Kredit</small></span>
+      </a>
+      <nav class="hm-navigation" aria-label="Menu utama">
+        <a href="#simulator" aria-current="page">Simulasi Kredit</a>
+        <button type="button" data-ui="open-catalog" aria-haspopup="dialog">Daftar Motor</button>
+        <a href="#bantuan">Bantuan</a>
+      </nav>
+      <div class="hm-header-install" data-pwa="install-banner" hidden>
+        <button type="button" class="hm-install-button" data-pwa="install" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span>Pasang aplikasi</span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hm-hero" aria-labelledby="hero-heading">
+    <div class="hm-shell hm-hero-content">
+      <p class="hm-eyebrow">PRICELIST TUNAI &amp; SIMULASI KREDIT</p>
+      <h1 id="hero-heading">Motor pilihanmu.<br>Cicilan sesuai rencanamu.</h1>
+      <p class="hm-hero-note">Pilih motor, atur DP, lalu tentukan tenor yang pas.</p>
+    </div>
+  </section>
+
+  <main id="simulator" class="hm-shell hm-main">
+    <section class="hm-pwa-tools" aria-label="Status aplikasi">
+      <p class="hm-pwa-notice" data-pwa="offline" role="status" aria-live="polite" hidden>Kamu sedang offline. Simulasi memakai pricelist 1 Oktober 2026 yang tersimpan. Hubungkan internet untuk pembaruan harga dan WhatsApp. Foto yang belum tersimpan mungkin tidak muncul.</p>
+      <div class="hm-pwa-update" data-pwa="update-banner" hidden><p role="status" data-pwa="update-message">Versi terbaru tersedia. Perbarui untuk memakai tampilan dan data terbaru.</p><button type="button" class="hm-pwa-button" data-pwa="update">Perbarui aplikasi</button></div>
+    </section>
+    <p data-ui="error" class="hm-error" role="alert" hidden></p>
+    <noscript><p class="hm-error">Aktifkan JavaScript untuk menggunakan simulasi kredit.</p></noscript>
+
+    <section class="hm-product hm-card" aria-labelledby="product-panel-heading">
+      <div class="hm-product-select">
+        <div class="hm-step"><span aria-hidden="true">01</span><h2 id="product-panel-heading">Pilih motormu</h2></div>
+        <div class="hm-search-field">
+          <label for="model-search" class="hm-visually-hidden">Cari tipe motor</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="model-search" data-ui="model-search" type="search" placeholder="Cari tipe motorâ¦" autocomplete="off" spellcheck="false" aria-controls="model-select" aria-describedby="model-search-status">
+        </div>
+        <label for="model-select" class="hm-visually-hidden">Pilih tipe motor</label>
+        <div class="hm-select-wrap"><select id="model-select" data-ui="model-select"><option value="">Memuat pilihan motorâ¦</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+        <p id="model-search-status" data-ui="model-search-status" class="hm-search-status" role="status"></p>
+        <h3 id="unit-heading" data-ui="model-name" class="hm-visually-hidden">Motor pilihanmu</h3>
+      </div>
+      <div class="hm-photo" aria-labelledby="unit-heading">
+        <p class="hm-color-heading">Pilihan warna</p>
+        <a data-ui="photo-link" class="hm-photo-link" target="_blank" rel="noopener noreferrer" aria-label="Perbesar foto dan semua pilihan warna motor">
+          <img data-ui="main-photo" class="hm-main-photo" alt="" width="780" height="410" decoding="async" hidden>
+        </a>
+        <p class="hm-photo-message" data-ui="photo-message" role="status">Memuat foto motorâ¦</p>
+        <span class="hm-photo-hint">Ketuk foto untuk memperbesar</span>
+      </div>
+      <div class="hm-product-info">
+        <div class="hm-otr-row"><span class="hm-small-label">Harga OTR Bandung</span><strong class="hm-otr" data-ui="otr">Rp â</strong></div>
+        <p class="hm-area-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Bandung &amp; Jawa Barat</p>
+        <details class="hm-specifications" data-ui="specifications">
+          <summary><span>Spesifikasi motor</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="hm-spec-content">
+            <div class="hm-spec-tabs" data-ui="spec-tabs" role="tablist" aria-label="Kategori spesifikasi">
+              <button type="button" id="spec-tab-engine" data-spec-tab="engine" role="tab" aria-selected="true" aria-controls="spec-panel" tabindex="0">Mesin</button>
+              <button type="button" id="spec-tab-chassis" data-spec-tab="chassis" role="tab" aria-selected="false" aria-controls="spec-panel" tabindex="-1">Rangka &amp; Kaki-Kaki</button>
+              <button type="button" id="spec-tab-dimensions" data-spec-tab="dimensions" role="tab" aria-selected="false" aria-controls="spec-panel" tabindex="-1">Dimensi &amp; Berat</button>
+              <button type="button" id="spec-tab-capacity" data-spec-tab="capacity" role="tab" aria-selected="false" aria-controls="spec-panel" tabindex="-1">Kapasitas</button>
+              <button type="button" id="spec-tab-electrical" data-spec-tab="electrical" role="tab" aria-selected="false" aria-controls="spec-panel" tabindex="-1">Kelistrikan</button>
+            </div>
+            <div id="spec-panel" data-ui="spec-panel" class="hm-spec-scroll" role="tabpanel" aria-labelledby="spec-tab-engine" tabindex="0"><table class="hm-spec-table"><caption class="hm-visually-hidden" data-ui="spec-caption">Spesifikasi unit pilihan</caption><tbody data-ui="spec-rows"></tbody></table><p class="hm-spec-message" data-ui="spec-message" hidden></p></div>
+            <div class="hm-spec-footer"><a data-ui="spec-link" href="https://www.astra-honda.com/product" target="_blank" rel="noopener noreferrer">Spesifikasi lengkap â</a><small>Sumber: Astra Honda Motor</small></div>
+            <p class="hm-spec-variant-note" data-ui="spec-family-note"></p>
+          </div>
+        </details>
+        <p class="hm-spec-categories">Mesin Â· Rangka Â· Dimensi Â· Kapasitas Â· Kelistrikan</p>
+      </div>
+    </section>
+
+    <div class="hm-workspace">
+      <section class="hm-finance hm-card" aria-labelledby="finance-heading">
+        <div class="hm-panel-heading"><div class="hm-step"><span aria-hidden="true">02</span><h2 id="finance-heading">Atur cicilanmu</h2></div><p>Geser untuk menyesuaikan anggaran</p></div>
+        <span class="hm-visually-hidden" data-ui="tenor-note">â bulan</span>
+        <div class="hm-finance-controls">
+          <div class="hm-control hm-dp-block">
+            <div class="hm-control-copy"><label for="dp-slider">Uang muka (DP)</label><output class="hm-control-value" data-ui="dp-value" for="dp-slider">Rp â</output><span class="hm-percent" data-ui="dp-percent">â dari OTR</span></div>
+            <div class="hm-slider-group"><div class="hm-range-row"><button type="button" class="hm-adjust" data-ui="dp-minus" aria-label="Kurangi uang muka">â</button><input id="dp-slider" data-ui="dp-slider" class="hm-range" type="range" min="0" max="1" step="1" value="0" aria-describedby="dp-help" disabled><button type="button" class="hm-adjust" data-ui="dp-plus" aria-label="Tambah uang muka">+</button></div><div class="hm-range-bounds"><span data-ui="dp-min">Rp â</span><span data-ui="dp-max">Rp â</span></div></div>
+            <p id="dp-help" class="hm-visually-hidden">DP dasar mengikuti tabel kredit. PelWil dan ongkir ditambahkan secara terpisah pada total DP.</p>
+          </div>
+          <div class="hm-control hm-monthly-block">
+            <div class="hm-control-copy"><label for="monthly-slider">Angsuran per bulan</label><output class="hm-control-value" data-ui="monthly-value" for="monthly-slider">Rp â</output></div>
+            <div class="hm-slider-group"><div class="hm-range-row"><button type="button" class="hm-adjust" data-ui="monthly-minus" aria-label="Kurangi angsuran bulanan">â</button><input id="monthly-slider" data-ui="monthly-slider" class="hm-range" type="range" min="0" max="1" step="1" value="0" aria-describedby="slider-help" disabled><button type="button" class="hm-adjust" data-ui="monthly-plus" aria-label="Tambah angsuran bulanan">+</button></div><div class="hm-range-bounds"><span data-ui="monthly-min">Rp â</span><span data-ui="monthly-max">Rp â</span></div></div>
+            <p id="slider-help" class="hm-visually-hidden">DP dan angsuran saling menyesuaikan pada tenor yang dipilih.</p>
+          </div>
+          <section class="hm-tenor-rates" aria-labelledby="tenor-rates-heading"><div class="hm-tenor-rate-header"><h3 id="tenor-rates-heading">Pilih tenor &amp; angsuran</h3><p data-ui="tenor-rates-dp" id="tenor-rates-dp" class="hm-visually-hidden">DP Rp â</p></div><div class="hm-tenor-rate-list" data-ui="tenor-rates" role="group" aria-labelledby="tenor-rates-heading" aria-describedby="tenor-rates-dp"></div><p class="hm-per-month">per bulan</p></section>
+        </div>
+
+        <section class="hm-pelwil" aria-labelledby="pelwil-heading">
+          <div class="hm-pelwil-controls"><h3 id="pelwil-heading">Wilayah KTP (PelWil)</h3><div class="hm-pelwil-modes" role="group" aria-label="Kelompok wilayah KTP"><button type="button" data-pelwil-mode="bandung" aria-pressed="true"><span aria-hidden="true"></span>Bandung Raya</button><button type="button" data-pelwil-mode="non-bandung" aria-pressed="false"><span aria-hidden="true"></span>Non-Bandung Raya</button></div><div class="hm-pelwil-select-field" data-ui="pelwil-region-field" hidden><label for="pelwil-region" class="hm-visually-hidden">Pilih wilayah sesuai KTP</label><select id="pelwil-region" data-ui="pelwil-region" aria-describedby="pelwil-note"><option value="" selected disabled>Pilih wilayah KTP</option></select></div><output class="hm-visually-hidden" data-ui="pelwil-fee" aria-label="Total tambahan PelWil dan ongkir">+ Rp 0</output></div>
+          <div class="hm-pelwil-costs"><dl class="hm-pelwil-breakdown"><div><dt>Luar daerah</dt><dd data-ui="pelwil-outside">Rp 0</dd></div><div><dt>Proses BBN</dt><dd data-ui="pelwil-bbn">Rp 0</dd></div><div><dt>Ongkir flat</dt><dd data-ui="pelwil-shipping">Rp 0</dd></div></dl><p id="pelwil-note" class="hm-pelwil-note" data-ui="pelwil-note">KTP Bandung Raya: tambahan PelWil dan ongkir Rp 0.</p></div>
+        </section>
+      </section>
+
+      <aside id="konsultasi" class="hm-credit-summary" aria-labelledby="credit-summary-heading">
+        <div class="hm-step"><span aria-hidden="true">03</span><h2 id="credit-summary-heading">Ringkasan simulasi</h2></div>
+        <dl class="hm-summary-grid"><div class="hm-summary-dp"><dt>Total DP</dt><dd data-ui="summary-dp">Rp â</dd><dd class="hm-summary-detail" data-ui="summary-detail">DP dasar + PelWil + ongkir</dd></div><div class="hm-summary-tenor"><dt>Tenor</dt><dd data-ui="summary-tenor">â bulan</dd></div><div class="hm-summary-monthly"><dt>Angsuran per bulan</dt><dd data-ui="summary-monthly">Rp â</dd></div></dl>
+        <div class="hm-consultation"><div class="hm-name-field"><label for="visitor-name">Nama kamu <span>(opsional)</span></label><input id="visitor-name" data-ui="visitor-name" class="hm-name-input" type="text" placeholder="Contoh: Andi Pratama" autocomplete="name" maxlength="100"></div><a class="hm-whatsapp" data-ui="whatsapp" target="_blank" rel="noopener noreferrer" aria-disabled="true"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M27 15.7A11 11 0 0 1 10.7 25l-6.4 1.7 1.8-6.1A11 11 0 1 1 27 15.7Z"/><path d="M11.7 9.7c-.8-.2-1.6.4-1.8 1.6-.5 3 4.1 8.4 7.8 9.3 1.4.4 3.4-.8 3.3-2.2l-3-1.5-1.3 1.2c-1.8-.7-3.8-2.7-4.4-4.3l1-1.4-1.6-2.7Z"/></svg><span>Ajukan promo lewat WhatsApp</span></a><p class="hm-promo-note">Konsultasikan promo yang tersedia.</p></div>
+      </aside>
+    </div>
+    <p data-ui="live-summary" class="hm-visually-hidden" aria-live="polite" aria-atomic="true"></p>
+
+    <aside id="bantuan" class="hm-help-bar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H7l-4 2 1.5-5A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg><p>Butuh bantuan memilih motor?</p><a data-ui="help-whatsapp" target="_blank" rel="noopener noreferrer" aria-disabled="true">Tanyakan ketersediaan unit <span aria-hidden="true">â</span></a></aside>
+    <p class="hm-bottom-note">Simulasi menggunakan pricelist 1 Oktober 2026, sebelum diskon atau promo. Konfirmasi penawaran terbaru melalui konsultasi.</p>
+  </main>
+
+  <footer class="hm-footer hm-shell"><p>2026 Â© DEVANNO ARYA Â· ALL RIGHTS RESERVED</p><p>Designed &amp; Developed by Devanno Arya Candra MTPF #4</p></footer>
+  <a class="hm-floating-contact" data-ui="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-disabled="true" aria-label="Tanya promo dan diskon motor Honda melalui WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M27 15.7A11 11 0 0 1 10.7 25l-6.4 1.7 1.8-6.1A11 11 0 1 1 27 15.7Z"/><path d="M11.7 9.7c-.8-.2-1.6.4-1.8 1.6-.5 3 4.1 8.4 7.8 9.3 1.4.4 3.4-.8 3.3-2.2l-3-1.5-1.3 1.2c-1.8-.7-3.8-2.7-4.4-4.3l1-1.4-1.6-2.7Z"/></svg><span>Tanya Promo</span></a>
+
+  <dialog class="hm-catalog" data-ui="catalog" aria-labelledby="catalog-heading"><div class="hm-catalog-header"><div><p class="hm-eyebrow">PILIHAN HONDA</p><h2 id="catalog-heading">Temukan motormu.</h2></div><button type="button" class="hm-catalog-close" data-ui="close-catalog" aria-label="Tutup pilihan motor">Ã</button></div><label for="catalog-search" class="hm-visually-hidden">Cari nama motor Honda</label><input id="catalog-search" data-ui="catalog-search" class="hm-search" type="search" placeholder="Cari Beat, Vario, PCX, atau unit lainnyaâ¦" autocomplete="off" spellcheck="false"><p class="hm-catalog-status" data-ui="catalog-status" role="status"></p><div class="hm-catalog-grid" data-ui="catalog-grid"></div></dialog>
+
+  <dialog class="hm-pwa-dialog" data-pwa="dialog" aria-labelledby="pwa-heading" aria-describedby="pwa-description"><div class="hm-pwa-dialog-heading"><div><p class="hm-eyebrow">APLIKASI SIMULASI MOTOR</p><h2 id="pwa-heading">Pasang di HP kamu.</h2></div><button type="button" class="hm-pwa-close" data-pwa="close" aria-label="Tutup panduan pemasangan">Ã</button></div><p id="pwa-description" class="hm-pwa-description">Setelah dipasang, ketuk ikon Simulasi Motor di layar utama untuk membuka simulasi.</p><p class="hm-pwa-notice" data-pwa="secure-note" hidden>Buka tautan website yang sudah online untuk memasang aplikasi.</p><div class="hm-pwa-platforms" role="group" aria-label="Pilih jenis HP"><button type="button" data-pwa-platform="android" aria-pressed="true" aria-controls="pwa-android">Android</button><button type="button" data-pwa-platform="ios" aria-pressed="false" aria-controls="pwa-ios">iPhone</button></div><section id="pwa-android" data-pwa="android-guide" aria-label="Pemasangan Android"><ol class="hm-pwa-steps"><li>Buka tautan website ini di <strong>Google Chrome</strong>.</li><li>Ketuk menu <strong>â®</strong> di dekat kolom alamat.</li><li>Pilih <strong>Instal aplikasi</strong> atau <strong>Tambahkan ke layar utama â Instal</strong>, sesuai versi Chrome.</li><li>Ikuti petunjuk, lalu buka ikon <strong>Simulasi Motor</strong> di HP.</li></ol></section><section id="pwa-ios" data-pwa="ios-guide" aria-label="Pemasangan iPhone" hidden><ol class="hm-pwa-steps"><li>Buka tautan website ini di <strong>Safari</strong>.</li><li>Ketuk <strong>Bagikan / Share</strong>, melalui ikon kotak dengan panah ke atas atau menu halaman Safari.</li><li>Pilih <strong>Tambahkan ke Layar Utama / Add to Home Screen</strong>.</li><li>Aktifkan <strong>Buka sebagai Aplikasi Web / Open as Web App</strong> bila tersedia, lalu ketuk <strong>Tambah / Add</strong>.</li><li>Buka ikon <strong>Simulasi Motor</strong> di layar utama.</li></ol></section><p class="hm-pwa-footnote">Data kredit yang sudah tersimpan dapat dibuka tanpa internet. WhatsApp, pembaruan harga, dan foto yang belum tersimpan memerlukan koneksi.</p></dialog>
+</div>
+</body>
+</html>
+

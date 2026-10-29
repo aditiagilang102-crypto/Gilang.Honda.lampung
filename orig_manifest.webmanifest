@@ -1,0 +1,33 @@
+{
+  "id": "./",
+  "name": "Simulasi Motor",
+  "short_name": "Simulasi Motor",
+  "description": "Pricelist dan simulasi kredit motor Honda. Lihat semua warna unit, atur DP dan angsuran, lalu konsultasikan promo melalui WhatsApp.",
+  "lang": "id",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f6f6",
+  "theme_color": "#d71920",
+  "icons": [
+    {
+      "src": "icons/motor-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/motor-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/motor-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
